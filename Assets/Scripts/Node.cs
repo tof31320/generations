@@ -27,6 +27,8 @@ public class Node : MonoBehaviour {
     {
         float y = transform.position.y - TreeLayout.GAPSIZE_H - height;
 
+        Vector3 next = new Vector3(transform.position.x, y, transform.position.z);
+
         if (children.Count == 0)
         {
             return;
@@ -34,17 +36,14 @@ public class Node : MonoBehaviour {
         }
         else
         {
-            childrenWidth = GetLayoutWidth();
-
-            Vector3 next = new Vector3(transform.position.x, y, transform.position.z);
-            float step = childrenWidth / children.Count;
-           
-            for (int i = 0; i < children.Count; i++)
+            for(int i = 0; i < children.Count; i++)
             {
-                children[i].transform.position = new Vector3(next.x + step * i, next.y, next.z);
+                children[i].transform.position = next;
+
+                next = new Vector3(next.x + children[i].GetLayoutWidth() + TreeLayout.GAPSIZE_W, next.y, next.z);
 
                 children[i].LayoutChildren(layout);
-            }
+            }    
         }
     }
 
