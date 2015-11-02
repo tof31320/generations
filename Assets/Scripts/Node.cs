@@ -11,7 +11,7 @@ public class Node : MonoBehaviour {
     public float width = 1f;
     public float height = 1f;
 
-    public float childrenWidth = 0f;
+    public float childrenWidth = 0f;    
 
 	// Use this for initialization
 	void Start () {        
@@ -22,6 +22,11 @@ public class Node : MonoBehaviour {
     {
 	    
 	}
+
+    public void CreateLinkWithParent()
+    {
+        
+    }
 
     public void LayoutChildren(TreeLayout layout)
     {
@@ -41,7 +46,7 @@ public class Node : MonoBehaviour {
                 children[i].transform.position = next;
 
                 next = new Vector3(next.x + children[i].GetLayoutWidth() + TreeLayout.GAPSIZE_W, next.y, next.z);
-
+                
                 children[i].LayoutChildren(layout);
             }    
         }
@@ -60,8 +65,7 @@ public class Node : MonoBehaviour {
             {
                 _width += children[i].GetLayoutWidth();
             }
-            //_width += (children.Count - 1) * TreeLayout.GAPSIZE_W;
-
+            
             return _width;
         }
     }
