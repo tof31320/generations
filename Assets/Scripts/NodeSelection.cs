@@ -10,9 +10,7 @@ public class NodeSelection : MonoBehaviour {
     void Start()
     {
         node = GetComponent<Node>();
-    }
-
-    public SpriteRenderer selectionSpriteRenderer;
+    }   
 	
 	// Update is called once per frame
 	void Update () {	
