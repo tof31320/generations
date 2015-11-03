@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
     public int generation = 1;
 
     public GameSpeedUpdater gameSpeedManager;
+
     public UIMenuManager menuManager;
 
     void Awake()
@@ -42,6 +43,7 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
         set
         {
             _nodeSelected = value;
+			
             menuManager.detailsNodeMenu.node = _nodeSelected;
             menuManager.activeMenu = menuManager.detailsNodeMenu;
         }

@@ -25,5 +25,8 @@ public class NodeUIManager : MonoBehaviour {
 	void Update () {
         txtName.text = node.name + (!nodeLife.dead ? " (" + nodeLife.age + ")" : "(Mort)");
         healthSlider.value = nodeLife.health;         
+
+        txtName.text = node.name + " (" + nodeLife.age + ")";        
+
     }
 }

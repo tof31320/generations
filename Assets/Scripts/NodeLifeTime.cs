@@ -75,4 +75,14 @@ public class NodeLifeTime : MonoBehaviour {
         Debug.Log(node.name + " est mort(e) !");
         node.OnDeath();
     }
+
+	// Use this for initialization
+	void Start () {
+        node = GetComponent<Node>();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
 }
