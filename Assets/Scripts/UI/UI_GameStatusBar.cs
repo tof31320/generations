@@ -1,0 +1,30 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+
+public class UI_GameStatusBar : MonoBehaviour {
+
+    public Text txtAnnee = null;
+
+    public Text txtGeneration = null;
+
+    public Slider gameSpeedSlider = null;
+
+    public Button btnOptions = null;   
+
+    public void Update()
+    {
+        txtAnnee.text = GameController.instance.annee + "";
+        txtGeneration.text = GameController.instance.generation + "";
+    }
+
+    public void TogglePause()
+    {
+        GameController.instance.pause = !GameController.instance.pause; 
+    }
+
+    public void OnGameSpeedChange()
+    {
+        GameController.instance.gameSpeed = 1f - gameSpeedSlider.value;
+    }
+}
