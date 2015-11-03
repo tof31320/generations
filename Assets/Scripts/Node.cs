@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Node : MonoBehaviour {
+public class Node : MonoBehaviour, GameObjectUpdatable {
+
+    public string name = "";
 
     public Node parent = null;
 
@@ -11,11 +13,19 @@ public class Node : MonoBehaviour {
     public float width = 1f;
     public float height = 1f;
 
-    public float childrenWidth = 0f;    
+    public float childrenWidth = 0f;
+
+    private List<GameObject> links = null;
 
 	// Use this for initialization
-	void Start () {        
+	void Start () {
+        GameController.instance.RegisterUpdatableObject(this);
 	}
+
+    void OnDestroy()
+    {
+        GameController.instance.UnregisterUpdatableObject(this);
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -23,9 +33,31 @@ public class Node : MonoBehaviour {
 	    
 	}
 
-    public void CreateLinkWithParent()
+    public void ClearLinks()
     {
-        
+        for(int i = 0; links != null && i < links.Count; i++)
+        {
+            Destroy(links[i]);
+        }
+    }
+
+    public void CreateLinksWithChildren(GameObject linkGameObject)
+    {
+        ClearLinks();
+
+        links = new List<GameObject>();
+
+        for (int i = 0; i < children.Count; i++)
+        {
+            GameObject ln = Instantiate(linkGameObject, transform.position, Quaternion.identity) as GameObject;
+            links.Add(ln);
+
+            LineRenderer lineRenderer = ln.GetComponent<LineRenderer>();            
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, children[i].transform.position);            
+
+            children[i].CreateLinksWithChildren(linkGameObject);
+        }
     }
 
     public void LayoutChildren(TreeLayout layout)
@@ -85,5 +117,10 @@ public class Node : MonoBehaviour {
                 child.UpdateChildrenNodes();
             }
         }
+    }
+
+    public void OnUpdateGame()
+    {
+        Debug.Log("UpdateGame(Node):" + this);
     }
 }

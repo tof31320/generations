@@ -13,23 +13,22 @@ public class TreeLayout : MonoBehaviour {
 
     void Start()
     {
-        rootNode.UpdateChildrenNodes();
-        rootNode.LayoutChildren(this);
-    }
-
-    public void CreateLinks()
-    {
-
-    }
+        UpdateLayout();
+    }   
 
     public void UpdateLayout()
     {
+        rootNode.UpdateChildrenNodes();
         rootNode.LayoutChildren(this);
+        rootNode.CreateLinksWithChildren(linkGameObject);
     }
 
     public void Update()
     {
         //rootNode.UpdateChildrenNodes();
-        //UpdateLayout();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            UpdateLayout();
+        }        
     }
 }
