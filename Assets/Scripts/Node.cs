@@ -42,12 +42,7 @@ public class Node : MonoBehaviour, GameObjectUpdatable {
     {
         GameController.instance.UnregisterUpdatableObject(this);
         SetSpriteColor(Color.black);
-	}
-	
-	// Use this for initialization
-	void Start () {
-        GameController.instance.RegisterUpdatableObject(this);
-	}
+	}	
 
     void OnDestroy()
     {

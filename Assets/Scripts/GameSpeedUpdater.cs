@@ -11,13 +11,12 @@ public class GameSpeedUpdater : MonoBehaviour {
 
     private List<GameObjectUpdatable> updatables = null;
 
-	// Use this for initialization
-	void Awake () {
-        updatables = new List<GameObjectUpdatable>();
-    }
-
     public void RegisterObject(GameObjectUpdatable updatable)
     {
+        if (updatables == null)
+        {
+            updatables = new List<GameObjectUpdatable>();
+        }
         if (!updatables.Contains(updatable)) {
             updatables.Add(updatable);
         }
