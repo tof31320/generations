@@ -12,6 +12,11 @@ public class UI_GameStatusBar : MonoBehaviour {
 
     public Button btnOptions = null;   
 
+    public void Start()
+    {
+        gameSpeedSlider.value = GameController.instance.gameSpeedManager.gameSpeed;
+    }
+
     public void Update()
     {
         txtAnnee.text = GameController.instance.annee + "";

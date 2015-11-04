@@ -5,6 +5,8 @@ using System.Collections;
 
 public class MouseController : MonoBehaviour {
 
+    public int mouseDragButton = 1;
+
     public CameraController cameraController;
 
     private bool clicked = false;
@@ -25,19 +27,27 @@ public class MouseController : MonoBehaviour {
 
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (!clicked && Input.GetMouseButtonDown(0))
+        if (!clicked && Input.GetMouseButtonDown(mouseDragButton))
         {
             clicked = true;
             startPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        }else if (clicked && Input.GetMouseButtonUp(0))
+        }else if (clicked && Input.GetMouseButtonUp(mouseDragButton))
         {
             // Release            
             clicked = false;
             //cameraController.view = mouseWorldPosition;
         }
 
-        //cameraController.useDampView = clicked;
+        // Zoom
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            cameraController.ZoomOut();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            cameraController.ZoomIn();
+        }
 
         if (clicked)
         {

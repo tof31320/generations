@@ -8,7 +8,7 @@ public class GenerateTreeExample : MonoBehaviour {
     public TreeLayout tree;
 
     // Options de la génération
-    public int maxGenerations = 3;
+    public int maxGenerations = 4;
     public int minChildrenByParent = 0;
     public int maxChildrenByParent = 3;
 
@@ -19,28 +19,54 @@ public class GenerateTreeExample : MonoBehaviour {
 
     public void GenerateRandomExample()
     {
-        tree.rootNode = RandomNode();
+        tree.rootNode = RandomNode(null);        
 
-        Node currentNode = tree.rootNode;
-        int nbGenerations = Random.Range(1, maxGenerations);
-        for(int i = 0; i < nbGenerations; i++)
-        {
-            int nbChildren = Random.Range(minChildrenByParent, maxChildrenByParent);
-
-
-        }
+        GenerateDescendanceOfNode(tree.rootNode, 1);
 
         tree.UpdateLayout();
     }
 
-    public Node RandomNode()
+    public void GenerateDescendanceOfNode(Node nodeParent, int generation)
     {
+        if (generation > maxGenerations)
+        {
+            return;
+        }
+
+        int nbChildren = Random.Range(minChildrenByParent, maxChildrenByParent);
+
+        for(int i = 1; i < 3; i++)
+        {
+            Node child = RandomNode(nodeParent);
+
+            GenerateDescendanceOfNode(child, generation + 1);
+        }
+    }
+
+    public Node RandomNode(Node nodeParent)
+    { 
         GameObject g = Instantiate(nodeGameObject, Vector3.zero, Quaternion.identity) as GameObject;
-        g.transform.parent = tree.transform;
+        if (nodeParent == null)
+        {
+            g.transform.parent = tree.transform;
+        }
+        else
+        {
+            g.transform.parent = nodeParent.transform;
+        }        
 
         Node node = g.GetComponent<Node>();
         
-        node.nodeName = RandomNames.PickName();        
+        node.nodeName = RandomNames.PickName();
+        if (nodeParent == null)
+        {
+            node.naissance = -100;
+        }
+        else
+        {
+            node.naissance = nodeParent.naissance + Random.Range(18, 40);
+        }
+         
 
         return node;
     }

@@ -55,7 +55,10 @@ public class Node : MonoBehaviour, GameObjectUpdatable {
 
     void OnDestroy()
     {
-        GameController.instance.UnregisterUpdatableObject(this);
+        if (GameObject.FindGameObjectWithTag("GameController") != null)
+        {
+            GameController.instance.UnregisterUpdatableObject(this);
+        }        
     }
 	
 	// Update is called once per frame

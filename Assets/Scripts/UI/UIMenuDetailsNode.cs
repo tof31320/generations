@@ -37,7 +37,7 @@ public class UIMenuDetailsNode : UIMenu {
 
         if (nodeLifeTime != null)
         {
-            txtTitle.text = nodeLifeTime.node.name;
+            txtTitle.text = nodeLifeTime.node.nodeName;
             txtAge.text = nodeLifeTime.age + " ans";
             txtHealth.text = nodeLifeTime.health * 100.0f + "%";
         }

@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour {
     public bool useBorders = true;
     public bool useDampView = true;
 
-    private float zoomSize = 0f;
+    public float zoomSize = 0f;
 
     void Start()
     {
@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour {
         }
 
         // Direction
-        if (useBorders && Input.mousePosition.x < margin.x)
+        /*if (useBorders && Input.mousePosition.x < margin.x)
         {
             // Left
             view += new Vector3(-scrollSpeed, 0f, 0f);
@@ -47,21 +47,35 @@ public class CameraController : MonoBehaviour {
         {
             view += new Vector3(0f, scrollSpeed, 0f);
         }
+        */
 
         // Zoom
         if (Input.GetKeyDown(KeyCode.Z) && zoomSize < 10f)
         {
-            zoomSize += 1f;
+            ZoomIn();
            
         }else if (Input.GetKeyDown(KeyCode.A) && zoomSize > 1f)
         {
-            zoomSize -= 1f;
+            ZoomOut();
         }
-
-        if (useDampView) {
-            transform.position = Vector3.Lerp(transform.position, view, damp);
-        }
-
+        
+        transform.position = Vector3.Lerp(transform.position, view, damp);        
         GetComponent<Camera>().orthographicSize = Mathf.Lerp(GetComponent<Camera>().orthographicSize, zoomSize, damp);
+    }
+
+    public void ZoomIn()
+    {
+        zoomSize = Mathf.Clamp(zoomSize + 1, 1f, 10f);
+    }
+
+    public void ZoomOut()
+    {
+        zoomSize = Mathf.Clamp(zoomSize - 1, 1f, 10f);
+    }
+
+    public void FocusOnNode(Node node)
+    {
+        useDampView = true;
+        view = new Vector3(node.transform.position.x, node.transform.position.y, view.z);
     }
 }

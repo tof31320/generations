@@ -8,12 +8,14 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
     public int annee = 1;
     public int generation = 1;
 
+    public CameraController cameraController;
     public GameSpeedUpdater gameSpeedManager;
 
     public UIMenuManager menuManager;
 
     void Awake()
     {
+        cameraController = Camera.main.GetComponent<CameraController>();
         gameSpeedManager = GetComponent<GameSpeedUpdater>();
         menuManager = GetComponent<UIMenuManager>();
 
@@ -50,6 +52,8 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
 			
             menuManager.detailsNodeMenu.node = _nodeSelected;
             menuManager.activeMenu = menuManager.detailsNodeMenu;
+
+            cameraController.FocusOnNode(_nodeSelected);
         }
     }
 
