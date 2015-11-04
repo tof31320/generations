@@ -23,10 +23,7 @@ public class NodeUIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        txtName.text = node.name + (!nodeLife.dead ? " (" + nodeLife.age + ")" : "(Mort)");
-        healthSlider.value = nodeLife.health;         
-
-        txtName.text = node.name + " (" + nodeLife.age + ")";        
-
+        txtName.text = node.nodeName + (!nodeLife.dead ? " (" + nodeLife.age + ")" : "(Mort)");
+        healthSlider.value = nodeLife.health;                 
     }
 }

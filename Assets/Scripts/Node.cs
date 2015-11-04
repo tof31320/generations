@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Node : MonoBehaviour, GameObjectUpdatable {
 
-    public string name = "";
+    public string nodeName = "";
 
     public Node parent = null;
 
@@ -21,6 +21,15 @@ public class Node : MonoBehaviour, GameObjectUpdatable {
 
     private Color _spriteColor = Color.white;
     private SpriteRenderer spriteRenderer;
+
+    public int naissance
+    {
+        get { return nodeLifeTime.naissance; }
+        set
+        {
+            nodeLifeTime.naissance = value;
+        }
+    }
 
 	// Use this for initialization
 	void Awake () {        
@@ -56,6 +65,11 @@ public class Node : MonoBehaviour, GameObjectUpdatable {
         {
             spriteRenderer.color = Color.Lerp(spriteRenderer.color, _spriteColor, 0.1f);
         }
+    }
+
+    public void AddNodeChild(Node child)
+    {
+        child.transform.parent = transform;        
     }
 
     public void ClearLinks()

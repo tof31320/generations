@@ -42,6 +42,10 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
         }
         set
         {
+            if (_nodeSelected != null)
+            {
+                _nodeSelected.GetComponent<NodeSelection>().selected = false;
+            }
             _nodeSelected = value;
 			
             menuManager.detailsNodeMenu.node = _nodeSelected;

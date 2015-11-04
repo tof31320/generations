@@ -8,7 +8,7 @@ public class TreeLayout : MonoBehaviour {
     public static float GAPSIZE_W = 0f;
 
     public GameObject linkGameObject;
-
+    
     public Node rootNode = null;
 
     void Start()
@@ -18,9 +18,11 @@ public class TreeLayout : MonoBehaviour {
 
     public void UpdateLayout()
     {
-        rootNode.UpdateChildrenNodes();
-        rootNode.LayoutChildren(this);
-        rootNode.CreateLinksWithChildren(linkGameObject);
+        if (rootNode != null) {
+            rootNode.UpdateChildrenNodes();
+            rootNode.LayoutChildren(this);
+            rootNode.CreateLinksWithChildren(linkGameObject);
+        }
     }
 
     public void Update()

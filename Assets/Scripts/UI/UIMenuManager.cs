@@ -7,11 +7,6 @@ public class UIMenuManager : MonoBehaviour {
 
     public UIMenuDetailsNode detailsNodeMenu;
 
-    void Start()
-    {
-        
-    }
-
     private UIMenu _activeMenu = null;
     public UIMenu activeMenu
     {
