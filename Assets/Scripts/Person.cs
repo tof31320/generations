@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Person : MonoBehaviour, GameObjectUpdatable
+public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
 {
     public Node node = null;
 
@@ -80,5 +80,10 @@ public class Person : MonoBehaviour, GameObjectUpdatable
     public void Update()
     {
         CheckHealth();
+    }
+
+    public void Layout(Node parent)
+    {
+        transform.position = parent.transform.position;
     }
 }

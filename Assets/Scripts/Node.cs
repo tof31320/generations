@@ -8,7 +8,7 @@ public class Node : MonoBehaviour {
     
     public List<Node> children = null;
 
-    public GameObject element = null;
+    public TreeLayoutElement element = null;
 
     public float width = 1f;
     public float height = 1f;
@@ -30,7 +30,7 @@ public class Node : MonoBehaviour {
         }
     }
 
-    public Person person
+    /*public Person person
     {
         get
         {
@@ -43,7 +43,7 @@ public class Node : MonoBehaviour {
                 return null;
             }
         }
-    }
+    }*/
 
     public void CreateLinksWithChildren(GameObject linkGameObject)
     {
@@ -64,8 +64,10 @@ public class Node : MonoBehaviour {
         }
     }
    
-    public void LayoutChildren(TreeLayout layout)
+    public void LayoutWithChildren(TreeLayout layout)
     {
+        element.Layout(this);
+
         float y = transform.position.y - TreeLayout.GAPSIZE_H - height;
 
         Vector3 next = new Vector3(transform.position.x, y, transform.position.z);
@@ -81,7 +83,7 @@ public class Node : MonoBehaviour {
 
                 next = new Vector3(next.x + children[i].GetLayoutWidth() + TreeLayout.GAPSIZE_W, next.y, next.z);
                 
-                children[i].LayoutChildren(layout);
+                children[i].LayoutWithChildren(layout);
             }    
         }
     }

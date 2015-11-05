@@ -36,7 +36,7 @@ public class TreeLayout : MonoBehaviour {
     {
         if (rootNode != null) {
             rootNode.UpdateChildrenNodes();
-            rootNode.LayoutChildren(this);
+            rootNode.LayoutWithChildren(this);
             rootNode.CreateLinksWithChildren(linkGameObject);
         }
     }
