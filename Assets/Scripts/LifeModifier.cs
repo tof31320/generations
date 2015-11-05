@@ -3,15 +3,14 @@ using System.Collections;
 
 public class LifeModifier {
 
-    public NodeLifeTime nodeLife;
+    public Person person;
 
-    public LifeModifier(NodeLifeTime node)
+    public LifeModifier(Person person)
     {
-        this.nodeLife = node;
+        this.person = person;
     }
 
 	public virtual void OnUpdate()
     {
-
     }
 }

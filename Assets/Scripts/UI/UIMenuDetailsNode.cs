@@ -4,24 +4,7 @@ using System.Collections;
 
 public class UIMenuDetailsNode : UIMenu {
 
-    private Node _node;
-    public Node node
-    {
-        get { return _node; }
-        set
-        {
-            _node = value;
-            if (_node != null) {
-                nodeLifeTime = node.GetComponent<NodeLifeTime>();
-            }
-            else
-            {
-                nodeLifeTime = null;
-            }
-        }
-    }
-
-    private NodeLifeTime nodeLifeTime = null;
+    public Person person;
    
     public Text txtAge;
     public Text txtHealth;
@@ -35,11 +18,11 @@ public class UIMenuDetailsNode : UIMenu {
 	void Update () {
         UpdateMenu();
 
-        if (nodeLifeTime != null)
+        if (person != null)
         {
-            txtTitle.text = nodeLifeTime.node.nodeName;
-            txtAge.text = nodeLifeTime.age + " ans";
-            txtHealth.text = nodeLifeTime.health * 100.0f + "%";
+            txtTitle.text = person.personName;
+            txtAge.text = person.age + " ans";
+            txtHealth.text = person.health * 100.0f + "%";
         }
 	}
 }

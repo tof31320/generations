@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
 
     public CameraController cameraController;
     public GameSpeedUpdater gameSpeedManager;
+    public VictoryDefeatManager victoryManager;
 
     public UIMenuManager menuManager;
 
@@ -35,25 +36,25 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
         set { }
     }
 
-    private Node _nodeSelected = null;
-    public Node nodeSelected
+    private Person _personSelected = null;
+    public Person personSelected
     {
         get
         {
-            return _nodeSelected;
+            return _personSelected;
         }
         set
         {
-            if (_nodeSelected != null)
+            if (_personSelected != null)
             {
-                _nodeSelected.GetComponent<NodeSelection>().selected = false;
+                _personSelected.GetComponent<PersonSelection>().selected = false;
             }
-            _nodeSelected = value;
+            _personSelected = value;
 			
-            menuManager.detailsNodeMenu.node = _nodeSelected;
+            menuManager.detailsNodeMenu.person = _personSelected;
             menuManager.activeMenu = menuManager.detailsNodeMenu;
 
-            cameraController.FocusOnNode(_nodeSelected);
+            cameraController.FocusOnNode(_personSelected);
         }
     }
 
@@ -86,6 +87,20 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
     public void UnregisterUpdatableObject(GameObjectUpdatable updatable)
     {
         gameSpeedManager.UnregisterObject(updatable);
+    }
+
+    public void Victory(VictoryDefeat victory)
+    {
+        Debug.Log("Victoire: " + victory);
+
+        victoryManager.StopCheckVictoryAndDefeat();
+    }
+
+    public void Defeat(VictoryDefeat defeat)
+    {
+        Debug.Log("Defeat: " + defeat);
+
+        victoryManager.StopCheckVictoryAndDefeat();
     }
 
     public void OnUpdateGame()

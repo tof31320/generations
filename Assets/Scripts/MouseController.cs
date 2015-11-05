@@ -5,7 +5,7 @@ using System.Collections;
 
 public class MouseController : MonoBehaviour {
 
-    public int mouseDragButton = 1;
+    public int mouseDragButton = 2;
 
     public CameraController cameraController;
 

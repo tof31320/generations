@@ -5,10 +5,8 @@ public class DeathModifier : LifeModifier {
 
     public int deathAge = 100;
 
-	public DeathModifier(NodeLifeTime node) : base(node)
-    {
-        nodeLife = node;
-
+	public DeathModifier(Person person) : base(person)
+    {        
         deathAge = Random.Range(40, 120);
 
         Debug.Log("Age de fin: " + deathAge);
@@ -18,14 +16,14 @@ public class DeathModifier : LifeModifier {
     {
         base.OnUpdate();
 
-        if (nodeLife.age > deathAge - 10f
-        && nodeLife.health > 0.9f)
+        if (person.age > deathAge - 10f
+        && person.health > 0.9f)
         {
-            nodeLife.health = 0.8f;
+            person.health = 0.8f;
         }
-        else if(nodeLife.age > deathAge)
+        else if(person.age > deathAge)
         {
-            nodeLife.health = 0f;
+            person.health = 0f;
         }
     }
 }

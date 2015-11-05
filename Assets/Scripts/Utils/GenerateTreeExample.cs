@@ -12,6 +12,8 @@ public class GenerateTreeExample : MonoBehaviour {
     public int minChildrenByParent = 0;
     public int maxChildrenByParent = 3;
 
+    public static int i = 0;
+
     public void Start()
     {
         GenerateRandomExample();
@@ -44,8 +46,9 @@ public class GenerateTreeExample : MonoBehaviour {
     }
 
     public Node RandomNode(Node nodeParent)
-    { 
+    {
         GameObject g = Instantiate(nodeGameObject, Vector3.zero, Quaternion.identity) as GameObject;
+        g.name = "NODE " + i++;
         if (nodeParent == null)
         {
             g.transform.parent = tree.transform;
@@ -57,17 +60,16 @@ public class GenerateTreeExample : MonoBehaviour {
 
         Node node = g.GetComponent<Node>();
         
-        node.nodeName = RandomNames.PickName();
+        node.person.personName = RandomNames.PickName();
         if (nodeParent == null)
         {
-            node.naissance = -100;
+            node.person.naissance = -100;
         }
         else
         {
-            node.naissance = nodeParent.naissance + Random.Range(18, 40);
+            node.person.naissance = nodeParent.person.naissance + Random.Range(18, 40);
         }
-         
 
-        return node;
+        return node;        
     }
 }

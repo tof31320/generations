@@ -2,77 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Node : MonoBehaviour, GameObjectUpdatable {
-
-    public string nodeName = "";
-
+public class Node : MonoBehaviour {
+    
     public Node parent = null;
-
+    
     public List<Node> children = null;
+
+    public GameObject element = null;
 
     public float width = 1f;
     public float height = 1f;
 
     public float childrenWidth = 0f;
 
-    private List<GameObject> links = null;
-
-    public NodeLifeTime nodeLifeTime = null;
-
-    private Color _spriteColor = Color.white;
-    private SpriteRenderer spriteRenderer;
-
-    public int naissance
-    {
-        get { return nodeLifeTime.naissance; }
-        set
-        {
-            nodeLifeTime.naissance = value;
-        }
-    }
-
-	// Use this for initialization
-	void Awake () {        
-        nodeLifeTime = GetComponent<NodeLifeTime>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    void Start()
-    {
-        GameController.instance.RegisterUpdatableObject(this);
-    }
-
-    public void SetSpriteColor(Color color)
-    {
-        _spriteColor = color;
-    }
-
-    public void OnDeath()
-    {
-        GameController.instance.UnregisterUpdatableObject(this);
-        SetSpriteColor(Color.black);
-	}	
-
-    void OnDestroy()
-    {
-        if (GameObject.FindGameObjectWithTag("GameController") != null)
-        {
-            GameController.instance.UnregisterUpdatableObject(this);
-        }        
-    }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        if (_spriteColor != spriteRenderer.color)
-        {
-            spriteRenderer.color = Color.Lerp(spriteRenderer.color, _spriteColor, 0.1f);
-        }
-    }
+    private List<GameObject> links = null;        
 
     public void AddNodeChild(Node child)
     {
-        child.transform.parent = transform;        
+        child.transform.parent = transform.FindChild("Children");        
     }
 
     public void ClearLinks()
@@ -80,6 +27,21 @@ public class Node : MonoBehaviour, GameObjectUpdatable {
         for(int i = 0; links != null && i < links.Count; i++)
         {
             Destroy(links[i]);
+        }
+    }
+
+    public Person person
+    {
+        get
+        {
+            if (element != null && element.GetComponent<Person>() != null)
+            {
+                return element.GetComponent<Person>();
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 
@@ -101,17 +63,15 @@ public class Node : MonoBehaviour, GameObjectUpdatable {
             children[i].CreateLinksWithChildren(linkGameObject);
         }
     }
-
+   
     public void LayoutChildren(TreeLayout layout)
     {
         float y = transform.position.y - TreeLayout.GAPSIZE_H - height;
 
         Vector3 next = new Vector3(transform.position.x, y, transform.position.z);
-
         if (children.Count == 0)
         {
             return;
-
         }
         else
         {
@@ -147,7 +107,7 @@ public class Node : MonoBehaviour, GameObjectUpdatable {
     public void UpdateChildrenNodes()
     {
         children = new List<Node>();
-
+        
         for(int i = 0; i < transform.childCount; i++)
         {
             Node child = transform.GetChild(i).GetComponent<Node>();
@@ -159,10 +119,5 @@ public class Node : MonoBehaviour, GameObjectUpdatable {
                 child.UpdateChildrenNodes();
             }
         }
-    }
-
-    public void OnUpdateGame()
-    {
-        nodeLifeTime.OnUpdateGame();
-    }
+    }    
 }

@@ -73,9 +73,9 @@ public class CameraController : MonoBehaviour {
         zoomSize = Mathf.Clamp(zoomSize - 1, 1f, 10f);
     }
 
-    public void FocusOnNode(Node node)
+    public void FocusOnNode(Person person)
     {
         useDampView = true;
-        view = new Vector3(node.transform.position.x, node.transform.position.y, view.z);
+        view = new Vector3(person.transform.position.x, person.transform.position.y, view.z);
     }
 }
