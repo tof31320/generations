@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Node : MonoBehaviour {
-    
+public class Node : MonoBehaviour
+{
+
     public Node parent = null;
-    
+
     public List<Node> children = null;
 
     public TreeLayoutElement element = null;
@@ -15,16 +16,16 @@ public class Node : MonoBehaviour {
 
     public float childrenWidth = 0f;
 
-    private List<GameObject> links = null;        
+    private List<GameObject> links = null;
 
     public void AddNodeChild(Node child)
     {
-        child.transform.parent = transform.FindChild("Children");        
+        child.transform.parent = transform.FindChild("Children");
     }
 
     public void ClearLinks()
     {
-        for(int i = 0; links != null && i < links.Count; i++)
+        for (int i = 0; links != null && i < links.Count; i++)
         {
             Destroy(links[i]);
         }
@@ -56,14 +57,14 @@ public class Node : MonoBehaviour {
             GameObject ln = Instantiate(linkGameObject, transform.position, Quaternion.identity) as GameObject;
             links.Add(ln);
 
-            LineRenderer lineRenderer = ln.GetComponent<LineRenderer>();            
+            LineRenderer lineRenderer = ln.GetComponent<LineRenderer>();
             lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, children[i].transform.position);            
+            lineRenderer.SetPosition(1, children[i].transform.position);
 
             children[i].CreateLinksWithChildren(linkGameObject);
         }
     }
-   
+
     public void LayoutWithChildren(TreeLayout layout)
     {
         element.Layout(this);
@@ -77,14 +78,14 @@ public class Node : MonoBehaviour {
         }
         else
         {
-            for(int i = 0; i < children.Count; i++)
+            for (int i = 0; i < children.Count; i++)
             {
                 children[i].transform.position = next;
 
                 next = new Vector3(next.x + children[i].GetLayoutWidth() + TreeLayout.GAPSIZE_W, next.y, next.z);
-                
+
                 children[i].LayoutWithChildren(layout);
-            }    
+            }
         }
     }
 
@@ -97,11 +98,11 @@ public class Node : MonoBehaviour {
         else
         {
             float _width = width;
-            for(int i = 0; i < children.Count; i++)
+            for (int i = 0; i < children.Count; i++)
             {
                 _width += children[i].GetLayoutWidth();
             }
-            
+
             return _width;
         }
     }
@@ -109,11 +110,11 @@ public class Node : MonoBehaviour {
     public void UpdateChildrenNodes()
     {
         children = new List<Node>();
-        
-        for(int i = 0; i < transform.childCount; i++)
+
+        for (int i = 0; i < transform.childCount; i++)
         {
             Node child = transform.GetChild(i).GetComponent<Node>();
-            if(child != null)
+            if (child != null)
             {
                 children.Add(child);
 
@@ -121,5 +122,5 @@ public class Node : MonoBehaviour {
                 child.UpdateChildrenNodes();
             }
         }
-    }    
+    }
 }
