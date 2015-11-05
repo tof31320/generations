@@ -13,8 +13,24 @@ public class TreeLayout : MonoBehaviour {
 
     void Start()
     {
+        if (rootNode == null)
+        {
+            rootNode = FindRootNode();
+        }
         UpdateLayout();
     }   
+
+    public Node FindRootNode()
+    {        
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).GetComponent<Node>() != null)
+            {
+                return transform.GetChild(i).GetComponent<Node>();
+            }
+        }
+        return null;
+    }
 
     public void UpdateLayout()
     {
