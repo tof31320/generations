@@ -4,6 +4,8 @@ using System.Collections;
 public class GenerateTreeExample : MonoBehaviour {
 
     public GameObject nodeGameObject;
+    public GameObject personGameObject;
+    public GameObject coupleGameObject;
 
     public TreeLayout tree;
 
@@ -13,6 +15,8 @@ public class GenerateTreeExample : MonoBehaviour {
     public int maxChildrenByParent = 3;
 
     public static int i = 0;
+
+    public float coupleProbabilityRate = 0.5f;
 
     public void Start()
     {
@@ -59,17 +63,57 @@ public class GenerateTreeExample : MonoBehaviour {
         }        
 
         Node node = g.GetComponent<Node>();
+
+        float alea = Random.Range(0f, 1f);
+        if (alea < coupleProbabilityRate)
+        {
+            // Création d'un couple
+            node.element = RandomCouple();
+        }
+        else
+        {
+            // Single
+            node.element = RandomPerson(null, null);
+        }
+
         
-        node.person.personName = RandomNames.PickName();
-        if (nodeParent == null)
+        /*if (nodeParent == null)
         {
             node.person.naissance = -100;
         }
         else
         {
             node.person.naissance = nodeParent.person.naissance + Random.Range(18, 40);
-        }
+        }*/
 
         return node;        
+    }
+
+    public Person RandomPerson(Person parentA, Person parentB)
+    {
+        GameObject g = Instantiate(personGameObject, Vector3.zero, Quaternion.identity) as GameObject;
+
+        Person person = g.GetComponent<Person>();
+        person.parentA = parentA;
+        person.parentB = parentB;
+        person.personName = RandomNames.PickName();
+
+        if (parentA != null)
+        {
+            person.naissance = parentA.naissance + Random.Range(18, 40);
+        }       
+
+        return person;
+    }
+
+    public Couple RandomCouple()
+    {
+        GameObject g = Instantiate(coupleGameObject, Vector3.zero, Quaternion.identity) as GameObject;
+
+        Couple couple = g.GetComponent<Couple>();
+        couple.personA = RandomPerson(null, null);
+        couple.personB = RandomPerson(null, null);
+
+        return couple;
     }
 }

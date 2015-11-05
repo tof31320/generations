@@ -6,6 +6,10 @@ public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
 {
     public Node node = null;
 
+    public Person parentA = null;
+
+    public Person parentB = null;
+
     public string personName = null;
 
     public int naissance = 0;
@@ -13,6 +17,8 @@ public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
     public bool dead = false;
 
     public List<LifeModifier> modifiers = null;
+
+    public float layoutWidth = 1f;
 
     public enum MariageState
     {
@@ -22,6 +28,13 @@ public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
         WIDOWER
     }
     public MariageState state = MariageState.SINGLE;
+
+    public enum Sexe
+    {
+        MALE,
+        FEMALE
+    }
+    public Sexe sexe = Sexe.MALE;
 
     public int age
     {
@@ -85,5 +98,20 @@ public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
     public void Layout(Node parent)
     {
         transform.position = parent.transform.position;
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
+    }
+
+    public float GetLayoutWidth()
+    {
+        return layoutWidth;
+    }
+
+    public float GetLayoutHeight()
+    {
+        return TreeLayout.GAPSIZE_H;
     }
 }

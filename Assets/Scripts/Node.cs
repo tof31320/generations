@@ -9,10 +9,15 @@ public class Node : MonoBehaviour
 
     public List<Node> children = null;
 
-    public TreeLayoutElement element = null;
-
-    public float width = 1f;
-    public float height = 1f;
+    private TreeLayoutElement _element;
+    public TreeLayoutElement element {
+        get { return _element; }
+        set
+        {
+            _element = value;
+            _element.GetTransform().parent = transform;
+        }
+    }
 
     public float childrenWidth = 0f;
 
@@ -29,22 +34,7 @@ public class Node : MonoBehaviour
         {
             Destroy(links[i]);
         }
-    }
-
-    /*public Person person
-    {
-        get
-        {
-            if (element != null && element.GetComponent<Person>() != null)
-            {
-                return element.GetComponent<Person>();
-            }
-            else
-            {
-                return null;
-            }
-        }
-    }*/
+    }    
 
     public void CreateLinksWithChildren(GameObject linkGameObject)
     {
@@ -69,7 +59,7 @@ public class Node : MonoBehaviour
     {
         element.Layout(this);
 
-        float y = transform.position.y - TreeLayout.GAPSIZE_H - height;
+        float y = transform.position.y - element.GetLayoutHeight();
 
         Vector3 next = new Vector3(transform.position.x, y, transform.position.z);
         if (children.Count == 0)
@@ -82,7 +72,7 @@ public class Node : MonoBehaviour
             {
                 children[i].transform.position = next;
 
-                next = new Vector3(next.x + children[i].GetLayoutWidth() + TreeLayout.GAPSIZE_W, next.y, next.z);
+                next = new Vector3(next.x + children[i].GetLayoutWidth(), next.y, next.z);
 
                 children[i].LayoutWithChildren(layout);
             }
@@ -93,11 +83,11 @@ public class Node : MonoBehaviour
     {
         if (children.Count == 0)
         {
-            return width;
+            return element.GetLayoutWidth();
         }
         else
         {
-            float _width = width;
+            float _width = element.GetLayoutWidth();
             for (int i = 0; i < children.Count; i++)
             {
                 _width += children[i].GetLayoutWidth();

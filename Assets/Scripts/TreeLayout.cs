@@ -4,7 +4,7 @@ using System.Collections;
 public class TreeLayout : MonoBehaviour {
 
     // Dimensions     
-    public static float GAPSIZE_H = 0f;
+    public static float GAPSIZE_H = 2.5f;
     public static float GAPSIZE_W = 0f;
 
     public GameObject linkGameObject;
