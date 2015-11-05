@@ -44,6 +44,8 @@ public class TreeLayout : MonoBehaviour {
     public void Update()
     {
         //rootNode.UpdateChildrenNodes();
+
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             UpdateLayout();
