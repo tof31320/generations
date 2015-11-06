@@ -21,7 +21,9 @@ public class Couple : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
 
     void OnDestroy()
     {
-        GameController.instance.UnregisterUpdatableObject(this);
+        if (GameObject.FindGameObjectWithTag("GameController") != null) {
+            GameController.instance.UnregisterUpdatableObject(this);
+        }
     }
 
     public void OnUpdateGame()

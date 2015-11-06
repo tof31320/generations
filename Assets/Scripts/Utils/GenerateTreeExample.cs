@@ -18,8 +18,11 @@ public class GenerateTreeExample : MonoBehaviour {
 
     public float coupleProbabilityRate = 0.5f;
 
+    public Avatars avatars;
+
     public void Start()
     {
+        avatars = GetComponent<Avatars>();
         GenerateRandomExample();
     }
 
@@ -97,6 +100,8 @@ public class GenerateTreeExample : MonoBehaviour {
         person.parentA = parentA;
         person.parentB = parentB;
         person.personName = RandomNames.PickName();
+        person.sexe = RandomSexe();
+        person.avatar = avatars.RandomAvatar(person.sexe);
 
         if (parentA != null)
         {
@@ -104,6 +109,18 @@ public class GenerateTreeExample : MonoBehaviour {
         }       
 
         return person;
+    }
+
+    private Person.Sexe RandomSexe()
+    {
+        if (Random.value * 100 % 2 == 0)
+        {
+            return Person.Sexe.MALE;
+        }
+        else
+        {
+            return Person.Sexe.FEMALE;
+        }
     }
 
     public Couple RandomCouple()

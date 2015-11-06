@@ -20,6 +20,20 @@ public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
 
     public float layoutWidth = 1f;
 
+    private Sprite _avatar = null;
+    public Sprite avatar
+    {
+        get
+        {
+            return _avatar;
+        }
+        set
+        {
+            _avatar = value;
+            GetComponent<SpriteRenderer>().sprite = _avatar;
+        }
+    }
+
     public enum MariageState
     {
         MARRIED,
@@ -32,7 +46,8 @@ public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
     public enum Sexe
     {
         MALE,
-        FEMALE
+        FEMALE,
+        NONE
     }
     public Sexe sexe = Sexe.MALE;
 
