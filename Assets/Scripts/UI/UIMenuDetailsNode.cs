@@ -5,7 +5,9 @@ using System.Collections;
 public class UIMenuDetailsNode : UIMenu {
 
     public Person person;
-   
+
+    public Image avatar;
+
     public Text txtAge;
     public Text txtHealth;
 
@@ -20,6 +22,7 @@ public class UIMenuDetailsNode : UIMenu {
 
         if (person != null)
         {
+            avatar.sprite = person.avatar;
             txtTitle.text = person.personName;
             txtAge.text = person.age + " ans";
             txtHealth.text = person.health * 100.0f + "%";

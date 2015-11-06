@@ -20,6 +20,8 @@ public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
 
     public float layoutWidth = 1f;
 
+    public SpriteRenderer spriteRenderer = null;
+
     private Sprite _avatar = null;
     public Sprite avatar
     {
@@ -59,10 +61,22 @@ public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
         }
     }
 
+    private Color _color = Color.white;
+    public Color color
+    {
+        get { return _color; }
+        set
+        {
+            _color = value;
+        }
+    }
+
     public float health = 1f;
 
     public void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         if (transform.parent != null)
         {
             node = transform.parent.GetComponent<Node>();
@@ -70,6 +84,8 @@ public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
         modifiers = new List<LifeModifier>();
 
         AddDefaultModifiers();
+
+        GameController.instance.RegisterUpdatableObject(this);
     }
 
     void AddDefaultModifiers()
@@ -78,7 +94,7 @@ public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
     }
 
     public void OnUpdateGame()
-    {
+    {        
         for (int i = 0; i < modifiers.Count; i++)
         {
             modifiers[i].OnUpdate();
@@ -87,8 +103,9 @@ public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
     
     public void Death()
     {
-        Debug.Log(node.name + " est mort(e) !");
-        //node.OnDeath();
+        color = Color.black;
+        //Debug.Log(node.name + " est mort(e) !");
+        //node.OnDeath();        
     }
 
     public void CheckHealth()
@@ -108,6 +125,9 @@ public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
     public void Update()
     {
         CheckHealth();
+
+        // gestion de la couleur du sprite
+        spriteRenderer.color = Color.Lerp(spriteRenderer.color, color, 0.1f);
     }
 
     public void Layout(Node parent)

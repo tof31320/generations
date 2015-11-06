@@ -28,6 +28,7 @@ public class GenerateTreeExample : MonoBehaviour {
 
     public void GenerateRandomExample()
     {
+        //GameController.instance.annee = 60 * maxGenerations;
         tree.rootNode = RandomNode(null);        
 
         GenerateDescendanceOfNode(tree.rootNode, 1);
@@ -99,8 +100,9 @@ public class GenerateTreeExample : MonoBehaviour {
         Person person = g.GetComponent<Person>();
         person.parentA = parentA;
         person.parentB = parentB;
-        person.personName = RandomNames.PickName();
+        
         person.sexe = RandomSexe();
+        person.personName = RandomNames.PickName(person.sexe);
         person.avatar = avatars.RandomAvatar(person.sexe);
 
         if (parentA != null)
@@ -113,7 +115,7 @@ public class GenerateTreeExample : MonoBehaviour {
 
     private Person.Sexe RandomSexe()
     {
-        if (Random.value * 100 % 2 == 0)
+        if (Random.Range(-1, 1) >=0)
         {
             return Person.Sexe.MALE;
         }
