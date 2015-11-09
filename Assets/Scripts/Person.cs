@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
 {
+    public Family family = null;
+
     public Node node = null;
 
     public Person parentA = null;

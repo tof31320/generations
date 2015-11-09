@@ -14,77 +14,19 @@ Platform assembly: C:\Users\Christophe\Documents\Unity\generations\Generations_D
 Loading C:\Users\Christophe\Documents\Unity\generations\Generations_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\Christophe\Documents\Unity\generations\Generations_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\Christophe\Documents\Unity\generations\Generations_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\Users\Christophe\Documents\Unity\generations\Generations_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\Christophe\Documents\Unity\generations\Generations_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\Users\Christophe\Documents\Unity\generations\Generations_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\Christophe\Documents\Unity\generations\Generations_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\Christophe\Documents\Unity\generations\Generations_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.043 seconds
+- Completed reload, in  0.036 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
 Platform assembly: C:\Users\Christophe\Documents\Unity\generations\Generations_Data\Managed\System.dll (this message is harmless)
-Age de fin: 89
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-Age de fin: 97
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-Age de fin: 49
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-Age de fin: 47
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-Age de fin: 41
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-Age de fin: 119
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-Age de fin: 89
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-Age de fin: 56
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-Age de fin: 110
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-Age de fin: 47
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-Age de fin: 89
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-Age de fin: 58
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-Age de fin: 59
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-Age de fin: 107
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-Age de fin: 48
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
 Setting up 2 worker threads for Enlighten.
   Thread -> id: 2bd0 -> priority: 1 
-  Thread -> id: 1d94 -> priority: 1 
+  Thread -> id: 23b8 -> priority: 1 
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.855890 ms
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 360.
+Total: 0.275606 ms (FindLiveObjects: 0.016300 ms CreateObjectMapping: 0.015395 ms MarkObjects: 0.226099 ms  DeleteObjects: 0.017810 ms)
+

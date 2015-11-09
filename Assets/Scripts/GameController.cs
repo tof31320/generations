@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
         menuManager = GetComponent<UIMenuManager>();
 
         gameSpeedManager.RegisterObject(this);
-    }
+    }   
 
     public static GameController instance
     {

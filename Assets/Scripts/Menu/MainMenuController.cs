@@ -1,10 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MainMenuController : MonoBehaviour {
+public class MainMenuController : MonoBehaviour, Menu {
 
-	// Use this for initialization
-	void Start () {
+    private MenuManager menuManager = null;
+
+    public void Awake()
+    {
+        menuManager = GameObject.Find("Canvas").GetComponent<MenuManager>();
+    }
+
+    public string GetMenuName()
+    {
+        return "main";
+    }
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -15,7 +32,7 @@ public class MainMenuController : MonoBehaviour {
 
     public void NewGame()
     {
-
+        menuManager.ShowMenu(menuManager.newFamilyMenu);
     }
 
     public void LoadGame()
@@ -36,5 +53,10 @@ public class MainMenuController : MonoBehaviour {
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void OnShow()
+    {
+
     }
 }
