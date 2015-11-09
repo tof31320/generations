@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
 
     public UIMenuManager menuManager;
 
-    public Transform tree = null;
+    public GameObject nodeGameObject;
     public GameObject personGameObject;
 
     void Awake()
@@ -35,13 +35,16 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
 
         Family family = familyGameObject.GetComponent<Family>();
 
-        GameObject ancester = Instantiate(personGameObject, Vector3.zero, Quaternion.identity) as GameObject;
-        ancester.transform.parent = tree;
+        GameObject nodeRoot = Instantiate(nodeGameObject, Vector3.zero, Quaternion.identity) as GameObject;
+        TreeLayout.instance.rootNode = nodeRoot.GetComponent<Node>();
 
+        GameObject ancester = Instantiate(personGameObject, Vector3.zero, Quaternion.identity) as GameObject;
+        
         Person p = ancester.GetComponent<Person>();
         p.personName = family.ancesterName;
         p.family = family;
-
+        nodeRoot.GetComponent<Node>().element = p;
+        
         personSelected = p;
 
         victoryManager.StartCheckVictoryAndDefeat();

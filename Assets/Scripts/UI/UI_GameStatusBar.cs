@@ -19,6 +19,8 @@ public class UI_GameStatusBar : MonoBehaviour {
     public void Start()
     {
         gameSpeedSlider.value = GameController.instance.gameSpeedManager.gameSpeed;
+
+        txtFamilyName.text = ((Person)TreeLayout.instance.rootNode.element).family.lastName;
     }
 
     public void Update()

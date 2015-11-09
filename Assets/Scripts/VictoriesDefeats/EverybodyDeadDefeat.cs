@@ -17,14 +17,28 @@ public class EverybodyDeadDefeat : VictoryDefeat
     }
 
     public bool Check()
-    {
-        TreeLayout.instance.rootNode;
-
-        return true;
+    {     
+        return CheckIfDead(TreeLayout.instance.rootNode);
     }
 
     private bool CheckIfDead(Node node)
     {
+        for(int i = 0; i < node.children.Count; i++)
+        {
+            bool dead = CheckIfDead(node.children[i]);
+            if (!dead)
+            {
+                return false;
+            }
+        }
 
+        if (node.element is Couple)
+        {
+            return ((Couple)node.element).personA.dead && ((Couple)node.element).personB.dead;
+        }
+        else
+        {
+            return ((Person)node.element).dead;
+        }
     }
 }

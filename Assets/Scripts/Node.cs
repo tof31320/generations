@@ -50,6 +50,9 @@ public class Node : MonoBehaviour
             LineRenderer lineRenderer = ln.GetComponent<LineRenderer>();
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, children[i].transform.position);
+            /*Link link = ln.GetComponent<Link>();
+            link.nodeA = this;
+            link.nodeB = children[i];*/
 
             children[i].CreateLinksWithChildren(linkGameObject);
         }
