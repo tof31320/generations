@@ -4,13 +4,17 @@ using System.Collections;
 
 public class UI_GameStatusBar : MonoBehaviour {
 
+    public Text txtFamilyName = null;
+
     public Text txtAnnee = null;
 
     public Text txtGeneration = null;
 
     public Slider gameSpeedSlider = null;
 
-    public Button btnOptions = null;   
+    public Button btnOptions = null;
+
+    public UIPauseMenu pauseMenu = null;
 
     public void Start()
     {
@@ -31,5 +35,11 @@ public class UI_GameStatusBar : MonoBehaviour {
     public void OnGameSpeedChange()
     {
         GameController.instance.gameSpeed = 1f - gameSpeedSlider.value;
+    }
+
+    public void PauseMenu()
+    {
+        GameController.instance.pause = true;
+        pauseMenu.gameObject.SetActive(true);
     }
 }

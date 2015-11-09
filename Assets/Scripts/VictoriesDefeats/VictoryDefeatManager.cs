@@ -8,17 +8,14 @@ public class VictoryDefeatManager : MonoBehaviour {
 
     public List<VictoryDefeat> defeats = null;
 
-    // Use this for initialization
-    void Start () {
+    public void StartCheckVictoryAndDefeat()
+    {
         victories = new List<VictoryDefeat>();
         victories.Add(new GenerationsNumberReachedVictory(GameController.instance, 10));
 
         defeats = new List<VictoryDefeat>();
         defeats.Add(new EverybodyDeadDefeat());
-    }
 
-    public void StartCheckVictoryAndDefeat()
-    {
         StartCoroutine("CheckVictoriesAndDefeats");
     }
 
@@ -30,7 +27,7 @@ public class VictoryDefeatManager : MonoBehaviour {
     IEnumerator CheckVictoriesAndDefeats()
     {
         while (true)
-        {
+        {            
             for (int i = 0; i < defeats.Count; i++)
             {
                 if (defeats[i].Check())

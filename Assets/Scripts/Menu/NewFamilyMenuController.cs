@@ -45,6 +45,7 @@ public class NewFamilyMenuController : MonoBehaviour, Menu {
     public void InitGame()
     {
         GameObject g = Instantiate(newFamilyGameObject, Vector3.zero, Quaternion.identity) as GameObject;
+        g.name = "NewFamilyDetails";
         Family family = g.GetComponent<Family>();
 
         family.lastName = familyNameInput.text;

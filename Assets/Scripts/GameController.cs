@@ -3,16 +3,20 @@ using System.Collections;
 
 public class GameController : MonoBehaviour, GameObjectUpdatable {
 
-    private static GameController _instance = null;    
+    private static GameController _instance = null;
 
+    public int ANNEE = 1800;
     public int annee = 1;
     public int generation = 1;
 
     public CameraController cameraController;
     public GameSpeedUpdater gameSpeedManager;
-    public VictoryDefeatManager victoryManager;
+    public VictoryDefeatManager victoryManager;        
 
     public UIMenuManager menuManager;
+
+    public Transform tree = null;
+    public GameObject personGameObject;
 
     void Awake()
     {
@@ -21,7 +25,27 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
         menuManager = GetComponent<UIMenuManager>();
 
         gameSpeedManager.RegisterObject(this);
+
+        InitGame();
     }   
+
+    public void InitGame()
+    {
+        GameObject familyGameObject = GameObject.Find("NewFamilyDetails");
+
+        Family family = familyGameObject.GetComponent<Family>();
+
+        GameObject ancester = Instantiate(personGameObject, Vector3.zero, Quaternion.identity) as GameObject;
+        ancester.transform.parent = tree;
+
+        Person p = ancester.GetComponent<Person>();
+        p.personName = family.ancesterName;
+        p.family = family;
+
+        personSelected = p;
+
+        victoryManager.StartCheckVictoryAndDefeat();
+    }
 
     public static GameController instance
     {
@@ -102,7 +126,7 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
 
         victoryManager.StopCheckVictoryAndDefeat();
     }
-
+    
     public void OnUpdateGame()
     {
         annee++;        

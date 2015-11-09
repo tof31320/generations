@@ -18,6 +18,13 @@ public class EverybodyDeadDefeat : VictoryDefeat
 
     public bool Check()
     {
-        return false;
+        TreeLayout.instance.rootNode;
+
+        return true;
+    }
+
+    private bool CheckIfDead(Node node)
+    {
+
     }
 }

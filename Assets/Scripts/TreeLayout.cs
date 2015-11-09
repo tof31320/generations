@@ -11,6 +11,23 @@ public class TreeLayout : MonoBehaviour {
     
     public Node rootNode = null;
 
+    private static TreeLayout _instance;
+    public static TreeLayout instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindGameObjectWithTag("Tree").GetComponent<TreeLayout>();
+            }
+            return _instance;
+        }
+        set
+        {
+            _instance = value;
+        }
+    }
+
     void Start()
     {
         if (rootNode == null)
