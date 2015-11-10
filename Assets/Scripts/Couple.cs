@@ -3,9 +3,37 @@ using System.Collections;
 
 public class Couple : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
 {
-    public Person personA = null;
+    public Node node = null;
 
-    public Person personB = null;
+    private Person _personA = null;
+    public Person personA
+    {
+        get { return _personA; }
+        set
+        {
+            _personA = value;
+            if (_personA != null)
+            {
+                _personA.state = Person.MariageState.MARRIED;
+                _personA.transform.parent = transform;
+            }
+        }
+    }
+
+    private Person _personB = null;
+    public Person personB
+    {
+        get { return _personB; }
+        set
+        {
+            _personB = value;
+            if (_personB != null)
+            {
+                _personB.state = Person.MariageState.MARRIED;
+                _personB.transform.parent = transform;
+            }
+        }
+    }
 
     public float layoutWidth = 2f;
     public float layoutGapSize = 1f;

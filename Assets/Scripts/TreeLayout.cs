@@ -8,8 +8,20 @@ public class TreeLayout : MonoBehaviour {
     public static float GAPSIZE_W = 0f;
 
     public GameObject linkGameObject;
-    
-    public Node rootNode = null;
+
+    private Node _rootNode = null;
+    public Node rootNode
+    {
+        get { return _rootNode; }
+        set
+        {
+            _rootNode = value;
+            if (_rootNode != null)
+            {
+                _rootNode.transform.parent = transform;
+            }
+        }
+    }
 
     private static TreeLayout _instance;
     public static TreeLayout instance
