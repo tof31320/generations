@@ -12,15 +12,21 @@ public class UI_GameStatusBar : MonoBehaviour {
 
     public Slider gameSpeedSlider = null;
 
+    public Button btnPause = null;
     public Button btnOptions = null;
 
     public UIPauseMenu pauseMenu = null;
+
+    public Sprite playButtonSprite = null;
+    public Sprite pauseButtonSprite = null;
 
     public void Start()
     {
         gameSpeedSlider.value = GameController.instance.gameSpeedManager.gameSpeed;
 
         txtFamilyName.text = ((Person)TreeLayout.instance.rootNode.element).family.lastName;
+
+        UpdatePauseButton();
     }
 
     public void Update()
@@ -31,7 +37,13 @@ public class UI_GameStatusBar : MonoBehaviour {
 
     public void TogglePause()
     {
-        GameController.instance.pause = !GameController.instance.pause; 
+       GameController.instance.pause = !GameController.instance.pause;
+
+        UpdatePauseButton();
+    }
+
+    public void UpdatePauseButton()
+    {        
     }
 
     public void OnGameSpeedChange()

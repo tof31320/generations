@@ -25,6 +25,14 @@ public class PersonSelection : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        /*if (!selected && GameController.instance.personSelected == this)
+        {
+            selected = true;
+        }else if (selected && GameController.instance.personSelected != this)
+        {
+            selected = false;
+        }*/
+
         if (selected && !selectionSpriteRenderer.enabled)
         {
             selectionSpriteRenderer.enabled = true;

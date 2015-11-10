@@ -10,7 +10,9 @@ public class NewFamilyMenuController : MonoBehaviour, Menu {
 
     public InputField familyNameInput = null;
 
-    public InputField rootName = null;    
+    public InputField rootName = null;
+
+    public Sprite defaultAvatar = null;
 
     public void Awake()
     {
@@ -50,6 +52,8 @@ public class NewFamilyMenuController : MonoBehaviour, Menu {
 
         family.lastName = familyNameInput.text;
         family.ancesterName = rootName.text;
+        family.ancesterAvatar = defaultAvatar;
+        family.ancesterSexe = Person.Sexe.MALE;
     }
 
     public void OnShow()

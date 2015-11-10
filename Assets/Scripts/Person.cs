@@ -150,5 +150,5 @@ public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
     public float GetLayoutHeight()
     {
         return TreeLayout.GAPSIZE_H;
-    }
+    }    
 }

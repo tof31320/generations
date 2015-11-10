@@ -17,50 +17,61 @@ public class CameraController : MonoBehaviour {
 
     public float zoomSize = 0f;
 
+    public bool dragging = false;
+    public Vector3 dragPosition = Vector3.zero;
+    public Vector3 deltaMove = Vector3.zero;
+
+    public bool auto = false;
+
     void Start()
     {
         zoomSize = GetComponent<Camera>().orthographicSize;
     }
 
 	public void Update()
-    {
-        if (EventSystem.current.IsPointerOverGameObject())
+    {        
+        transform.position = Vector3.Lerp(transform.position, view, damp);        
+        GetComponent<Camera>().orthographicSize = Mathf.Lerp(GetComponent<Camera>().orthographicSize, zoomSize, damp);
+        if (auto)
+        {
+            if (Vector3.Distance(transform.position, view) < 0.1f)
+            {                
+                auto = false;
+            }
+        }
+        if (EventSystem.current.IsPointerOverGameObject() || auto)
         {
             return;
-        }
-
-        // Direction
-        /*if (useBorders && Input.mousePosition.x < margin.x)
-        {
-            // Left
-            view += new Vector3(-scrollSpeed, 0f, 0f);
-        }
-        else if (useBorders && Input.mousePosition.x > Screen.width - margin.x)
-        {
-            view += new Vector3(scrollSpeed, 0f, 0f);
-        }
-        if (useBorders && Input.mousePosition.y < margin.y)
-        {
-            view += new Vector3(0f, -scrollSpeed, 0f);
-        }
-        else if (useBorders && Input.mousePosition.y > Screen.height - margin.y)
-        {
-            view += new Vector3(0f, scrollSpeed, 0f);
-        }
-        */
+        }        
 
         // Zoom
-        if (Input.GetKeyDown(KeyCode.Z) && zoomSize < 10f)
+        if ((Input.GetKeyDown(KeyCode.Z) && zoomSize < 10f)
+            || Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
             ZoomIn();
            
-        }else if (Input.GetKeyDown(KeyCode.A) && zoomSize > 1f)
+        }else if ((Input.GetKeyDown(KeyCode.A) && zoomSize > 1f)
+            || Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
             ZoomOut();
         }
-        
-        transform.position = Vector3.Lerp(transform.position, view, damp);        
-        GetComponent<Camera>().orthographicSize = Mathf.Lerp(GetComponent<Camera>().orthographicSize, zoomSize, damp);
+
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (Input.GetMouseButtonDown(0))
+        {
+            dragging = true;
+            dragPosition = mouseWorldPosition;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            dragging = false;
+        }
+
+        if (dragging)
+        {
+            deltaMove = mouseWorldPosition - dragPosition;
+            view = transform.position - deltaMove;             
+        }
     }
 
     public void ZoomIn()
@@ -75,7 +86,7 @@ public class CameraController : MonoBehaviour {
 
     public void FocusOnNode(Person person)
     {
-        useDampView = true;
+        auto = true;        
         view = new Vector3(person.transform.position.x, person.transform.position.y, view.z);
     }
 }

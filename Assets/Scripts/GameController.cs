@@ -41,8 +41,13 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
         GameObject ancester = Instantiate(personGameObject, Vector3.zero, Quaternion.identity) as GameObject;
         
         Person p = ancester.GetComponent<Person>();
+        
         p.personName = family.ancesterName;
+        p.avatar = family.ancesterAvatar;
+        p.sexe = family.ancesterSexe;
+
         p.family = family;
+        
         nodeRoot.GetComponent<Node>().element = p;
         
         personSelected = p;
@@ -77,7 +82,8 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
                 _personSelected.GetComponent<PersonSelection>().selected = false;
             }
             _personSelected = value;
-			
+            _personSelected.GetComponent<PersonSelection>().selected = true;
+
             menuManager.detailsNodeMenu.person = _personSelected;
             menuManager.activeMenu = menuManager.detailsNodeMenu;
 
