@@ -11,4 +11,6 @@ public interface TreeLayoutElement
     float GetLayoutHeight();
 
     Transform GetTransform();
+
+    void SetNode(Node node);
 }

@@ -140,4 +140,15 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
     {
         annee++;        
     }
+
+    public void MakeUnionWith(Person a, Person b)
+    {
+        Couple couple = RandomModel.instance.CreateCouple(a, b);
+        a.node.element = couple;
+    }
+
+    public void NewChild(Couple couple)
+    {
+        Person child = couple.MakeAChild();
+    }
 }

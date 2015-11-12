@@ -3,11 +3,15 @@ using System.Collections;
 
 public class TreeLayout : MonoBehaviour {
 
+    public GameObject nodeGameObject;
+
     // Dimensions     
     public static float GAPSIZE_H = 2.5f;
     public static float GAPSIZE_W = 0f;
 
     public GameObject linkGameObject;
+
+    public bool updateRequired = false;
 
     private Node _rootNode = null;
     public Node rootNode
@@ -61,12 +65,25 @@ public class TreeLayout : MonoBehaviour {
         return null;
     }
 
+    public Node CreateNode(Node parent, TreeLayoutElement element)
+    {
+        GameObject g = Instantiate(nodeGameObject, Vector3.zero, Quaternion.identity) as GameObject;
+
+        Node node = g.GetComponent<Node>();
+        node.parent = parent;
+        node.element = element;        
+
+        return node;
+    }
+
     public void UpdateLayout()
     {
         if (rootNode != null) {
             rootNode.UpdateChildrenNodes();
             rootNode.LayoutWithChildren(this);
             rootNode.CreateLinksWithChildren(linkGameObject);
+
+            updateRequired = false;
         }
     }
 
@@ -75,7 +92,7 @@ public class TreeLayout : MonoBehaviour {
         //rootNode.UpdateChildrenNodes();
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (updateRequired)
         {
             UpdateLayout();
         }        

@@ -72,67 +72,14 @@ public class GenerateTreeExample : MonoBehaviour {
         if (alea < coupleProbabilityRate)
         {
             // Création d'un couple
-            node.element = RandomCouple();
+            node.element = RandomModel.instance.RandomCouple();
         }
         else
         {
             // Single
-            node.element = RandomPerson(null, null);
+            node.element = RandomModel.instance.RandomPerson(null, null);
         }
-
-        
-        /*if (nodeParent == null)
-        {
-            node.person.naissance = -100;
-        }
-        else
-        {
-            node.person.naissance = nodeParent.person.naissance + Random.Range(18, 40);
-        }*/
-
+            
         return node;        
-    }
-
-    public Person RandomPerson(Person parentA, Person parentB)
-    {
-        GameObject g = Instantiate(personGameObject, Vector3.zero, Quaternion.identity) as GameObject;
-
-        Person person = g.GetComponent<Person>();
-        person.parentA = parentA;
-        person.parentB = parentB;
-        
-        person.sexe = RandomSexe();
-        person.personName = RandomNames.PickName(person.sexe);
-        person.avatar = avatars.RandomAvatar(person.sexe);
-
-        if (parentA != null)
-        {
-            person.naissance = parentA.naissance + Random.Range(18, 40);
-        }       
-
-        return person;
-    }
-
-    private Person.Sexe RandomSexe()
-    {
-        if (Random.Range(-1, 1) >=0)
-        {
-            return Person.Sexe.MALE;
-        }
-        else
-        {
-            return Person.Sexe.FEMALE;
-        }
-    }
-
-    public Couple RandomCouple()
-    {
-        GameObject g = Instantiate(coupleGameObject, Vector3.zero, Quaternion.identity) as GameObject;
-
-        Couple couple = g.GetComponent<Couple>();
-        couple.personA = RandomPerson(null, null);
-        couple.personB = RandomPerson(null, null);
-
-        return couple;
-    }
+    }    
 }

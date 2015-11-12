@@ -151,4 +151,9 @@ public class Person : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
     {
         return TreeLayout.GAPSIZE_H;
     }    
+
+    public void SetNode(Node node)
+    {
+        this.node = node;
+    }
 }

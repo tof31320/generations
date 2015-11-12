@@ -56,18 +56,21 @@ public class Couple : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
 
     public void OnUpdateGame()
     {
-
+        if (GameController.instance.annee % 10 == 0)
+        {
+            MakeAChild();
+        }
     }
 
     public void Layout(Node parent)
     {
         personA.transform.position = new Vector3(parent.transform.position.x - (layoutGapSize / 2f),
-                                                 parent.transform.position.y,
-                                                 parent.transform.position.z);
+                                                 transform.position.y,
+                                                 transform.position.z);
 
         personB.transform.position = new Vector3(parent.transform.position.x + (layoutGapSize / 2f),
-                                                 parent.transform.position.y,
-                                                 parent.transform.position.z); 
+                                                 transform.position.y,
+                                                 transform.position.z); 
     }
 
     public Transform GetTransform()
@@ -83,5 +86,20 @@ public class Couple : MonoBehaviour, GameObjectUpdatable, TreeLayoutElement
     public float GetLayoutHeight()
     {
         return TreeLayout.GAPSIZE_H;
+    }
+
+    public void SetNode(Node node)
+    {
+        this.node = node;
+    }
+
+    public Person MakeAChild()
+    {
+        Person child = RandomModel.instance.CreatePerson(personA, personB);
+        Node nodeChild = TreeLayout.instance.CreateNode(this.node, child);
+
+        node.AddNodeChild(nodeChild);
+
+        return child;
     }
 }

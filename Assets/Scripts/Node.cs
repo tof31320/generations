@@ -4,8 +4,19 @@ using System.Collections.Generic;
 
 public class Node : MonoBehaviour
 {
-
-    public Node parent = null;
+    private Node _parent = null;
+    public Node parent
+    {
+        get { return _parent; }
+        set
+        {
+            _parent = value;
+            if (_parent != null)
+            {
+                transform.parent = _parent.transform;
+            }
+        }
+    }
 
     public List<Node> children = null;
 
@@ -16,6 +27,10 @@ public class Node : MonoBehaviour
         {
             _element = value;
             _element.GetTransform().parent = transform;
+            _element.GetTransform().localPosition = Vector3.zero;
+            _element.SetNode(this);
+
+            TreeLayout.instance.updateRequired = true;
         }
     }
 
@@ -25,7 +40,9 @@ public class Node : MonoBehaviour
 
     public void AddNodeChild(Node child)
     {
-        child.transform.parent = transform.FindChild("Children");
+        child.parent = this;
+
+        TreeLayout.instance.updateRequired = true;
     }
 
     public void ClearLinks()

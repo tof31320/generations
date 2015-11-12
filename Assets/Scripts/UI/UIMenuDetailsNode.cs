@@ -31,32 +31,11 @@ public class UIMenuDetailsNode : UIMenu {
 
             btnUnion.interactable = person.state == Person.MariageState.SINGLE || person.state == Person.MariageState.DIVORCED;
         }
-	}
-
-    private Person RandomPerson()
-    {         
-        GameObject g = Instantiate(personGameObject, Vector3.zero, Quaternion.identity) as GameObject;
-
-        Person person = g.GetComponent<Person>();
-        person.parentA = parentA;
-        person.parentB = parentB;
-
-        person.sexe = RandomSexe();
-        person.personName = RandomNames.PickName(person.sexe);
-        person.avatar = avatars.RandomAvatar(person.sexe);
-
-        if (parentA != null)
-        {
-            person.naissance = parentA.naissance + Random.Range(18, 40);
-        }
-
-        return person;
-    }
-}
+	}    
 
     public void MakeUnion()
     {
-        Person random = RandomPerson();
+        Person random = RandomModel.instance.RandomPerson(null, null);
 
         GameController.instance.MakeUnionWith(person, random);
     }
