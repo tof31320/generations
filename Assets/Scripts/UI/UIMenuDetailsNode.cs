@@ -4,12 +4,19 @@ using System.Collections;
 
 public class UIMenuDetailsNode : UIMenu {
 
-    public Person person;
+    public Person person
+    {
+        get { return personPanel.person; }
+        set
+        {
+            personPanel.person = value;
+            updateRequired = true;
+        }
+    }
 
-    public Image avatar;
+    public bool updateRequired = false;
 
-    public Text txtAge;
-    public Text txtHealth;
+    public UIPersonPanel personPanel;   
 
     public Button btnUnion;
 
@@ -22,15 +29,14 @@ public class UIMenuDetailsNode : UIMenu {
 	void Update () {
         UpdateMenu();
 
-        if (person != null)
-        {
-            avatar.sprite = person.avatar;
-            txtTitle.text = person.personName;
-            txtAge.text = person.age + " ans";
-            txtHealth.text = person.health * 100.0f + "%";
+        
 
+        if (updateRequired && person != null)
+        {
+            Debug.Log("UpdatePanel..");
             btnUnion.interactable = person.state == Person.MariageState.SINGLE || person.state == Person.MariageState.DIVORCED;
-        }
+            updateRequired = false;
+        }        
 	}    
 
     public void MakeUnion()

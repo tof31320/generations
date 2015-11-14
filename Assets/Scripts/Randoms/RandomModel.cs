@@ -3,6 +3,7 @@ using System.Collections;
 
 public class RandomModel : MonoBehaviour {
 
+    public GameObject familyGameObject;
     public GameObject personGameObject;
     public GameObject coupleGameObject;
     public Avatars avatars;
@@ -61,6 +62,23 @@ public class RandomModel : MonoBehaviour {
         return CreateCouple(RandomPerson(null, null), RandomPerson(null, null));
     }
 
+    public Family CreateFamily(string lastname)
+    {
+        GameObject g = Instantiate(familyGameObject, Vector3.zero, Quaternion.identity) as GameObject;
+
+        Family family = g.GetComponent<Family>();
+        family.lastName = lastname;
+
+        return family;
+    }
+
+    public Family RandomFamily()
+    {
+        string lastname = "RANDOM";
+
+        return CreateFamily(lastname);
+    }
+
     public Person CreatePerson(Person parentA, Person parentB, string name = null, Sprite avatar = null, Person.Sexe sexe = Person.Sexe.MALE)
     {
         GameObject g = Instantiate(personGameObject, Vector3.zero, Quaternion.identity) as GameObject;
@@ -69,7 +87,8 @@ public class RandomModel : MonoBehaviour {
         person.parentA = parentA;
         person.parentB = parentB;
 
-       
+        person.family = RandomFamily();
+
         person.sexe = sexe;
         if (name == null)
         {
