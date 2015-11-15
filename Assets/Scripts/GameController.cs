@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
     public GameSpeedUpdater gameSpeedManager;
     public VictoryDefeatManager victoryManager;        
 
-    public UIMenuManager menuManager;
+    public UIMenuManager menuManager;    
 
     public GameObject nodeGameObject;
     public GameObject personGameObject;
@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
         cameraController = Camera.main.GetComponent<CameraController>();
         gameSpeedManager = GetComponent<GameSpeedUpdater>();
         menuManager = GetComponent<UIMenuManager>();
-
+        
         gameSpeedManager.RegisterObject(this);
 
         InitGame();
@@ -53,6 +53,8 @@ public class GameController : MonoBehaviour, GameObjectUpdatable {
         personSelected = p;
 
         victoryManager.StartCheckVictoryAndDefeat();
+
+        Debug.Log("UI: " + GameObject.FindGameObjectWithTag("UI_UnionPanel"));
     }
 
     public static GameController instance

@@ -41,8 +41,13 @@ public class UIMenuDetailsNode : UIMenu {
 
     public void MakeUnion()
     {
-        Person random = RandomModel.instance.RandomPerson(null, null);
+        bool pauseStateBeforeDisplay = GameController.instance.pause;
+        /*Person random = RandomModel.instance.RandomPerson(null, null);
+        
+        GameController.instance.MakeUnionWith(person, random);*/
+        GameController.instance.pause = true;
 
-        GameController.instance.MakeUnionWith(person, random);
+        UIUnionPanelController.instance.visible = true;
+        UIUnionPanelController.instance.personSelected = person;
     }
 }
